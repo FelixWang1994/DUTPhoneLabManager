@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE struts PUBLIC "-//Apache Software Foundation//DTD Struts Configuration 2.1//EN" "http://struts.apache.org/dtds/struts-2.1.dtd">
+<struts>
+	<constant name="struts.i18n.encoding" value="utf-8" />
+	<constant name="struts.date.format" value="YYYY年MM月dd日" />
+    <constant name="struts.multipart.maxSize" value="5000000"/>
+	<package name="file" extends="struts-default">
+		<global-results>
+			<result name="error">/index.jsp</result>
+		</global-results>
+		<global-exception-mappings>
+			<exception-mapping exception="java.lang.Exception" result="error"/>
+		</global-exception-mappings>
+		<!-- 配置处理文件上传的Action -->
+		<action name="Upload" class="first.UploadAction">
+			<!-- 配置fileUpload的拦截器 -->
+			<interceptor-ref name="fileUpload">
+				<!-- 配置允许上传的文件大小 -->
+				<param name="maximumSize">4500000</param> 
+			</interceptor-ref> 
+			<interceptor-ref name="defaultStack"/>
+			<result name="success">/add_news.jsp</result>	
+		</action>
+	</package>
+</struts>    
